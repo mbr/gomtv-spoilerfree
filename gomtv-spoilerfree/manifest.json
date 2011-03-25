@@ -1,0 +1,14 @@
+{
+	"name": "GOMTV spoiler free",
+	"background_page": "background.html",
+	"content_scripts": [
+		{
+			"matches": ["*://*.gomtv.net/*"],
+			"js": ["jquery.min.js",
+			       "gomtv-contentscript.js"],
+			"css": ["gomtv-contentstyle.css"]
+		}
+	],
+	"options_page": "options.html",
+	"version": "0.1"
+}
