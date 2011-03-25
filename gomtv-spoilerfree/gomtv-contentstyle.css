@@ -1,3 +1,9 @@
 .box_vod, #SNS_Update, #ch_vod, #replyFrame, #sugShowArea {
 	visibility: hidden;
 }
+
+.gomtv-spoilerfree-placeholder {
+	border: 3px solid black;
+	font-size: 1.5em;
+	color: blue;
+}
