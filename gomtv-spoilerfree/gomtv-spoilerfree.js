@@ -3,7 +3,8 @@
 var options = {
 	"hide-recent-videos": true,
 	"hide-social-networks": true,
-	"hide-comments": true
+	"hide-comments": true,
+	"hide-schedule": true,
 }
 
 chrome.extension.onRequest.addListener(

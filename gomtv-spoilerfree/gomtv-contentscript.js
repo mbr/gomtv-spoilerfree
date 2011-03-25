@@ -28,6 +28,7 @@ function apply_to_page(options) {
 	$("#sugShowArea").showOrSpoiler("Suggested video list", options['hide-recent-videos']);
 	$("#SNS_Update").showOrSpoiler("Social networks", options['hide-social-networks']);
 	$("#replyFrame").showOrSpoiler("Comments", options['hide-comments']);
+	$(".slist_off").each(function(n) { $(this).showOrSpoiler("Match", options['hide-schedule']); });
 }
 
 $(document).ready(function() {

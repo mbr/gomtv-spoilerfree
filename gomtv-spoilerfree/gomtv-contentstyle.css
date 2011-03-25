@@ -1,4 +1,4 @@
-.box_vod, #SNS_Update, #ch_vod, #replyFrame, #sugShowArea {
+.box_vod, #SNS_Update, #ch_vod, #replyFrame, #sugShowArea, .slist_off {
 	visibility: hidden;
 }
 
