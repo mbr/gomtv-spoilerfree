@@ -1,13 +1,22 @@
 <html>
 <head>
 <title>GOMTV spoiler free options</title>
-<!--
-<link rel="stylesheet" type="text/css" href="FIXME" />
--->
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="gomtv-options.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+	var opts = load_options();
+
+	$('#options').showOptionUI(available_options, opts, function(newopt) {
+		save_options(newopt);
+	});
+});
 </script>
 </head>
-<body onload="restore_options()">
-Options go here
+<body>
+<h1>Options for GOMTV</h1>
+<div id='options'>
+Options go here.
+</div>
 </body>
 </html>

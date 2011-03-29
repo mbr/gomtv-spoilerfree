@@ -32,7 +32,7 @@ $.fn.showOrSpoiler = function(msg, hide) {
 }
 
 function apply_to_page(options) {
-	console.log('running...')
+	console.log('running. options:',options)
 	$(".box_vod").showOrSpoiler("Recent video/photo list", options['hide-recent-videos']);
 	$("#ch_vod").showOrSpoiler("Video list", options['hide-recent-videos']);
 	$("#sugShowArea").showOrSpoiler("Suggested video list", options['hide-recent-videos']);
