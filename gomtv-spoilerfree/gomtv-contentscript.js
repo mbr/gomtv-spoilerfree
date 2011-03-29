@@ -71,7 +71,7 @@ function perform_video_voodoo(options) {
 		// save important options
 		vod_params['leagueid'] = parsed.queryKey['leagueid']
 		vod_params['title'] = parsed.queryKey['title']
-		vod_params['vjoinid'] = parsed.queryKey['vjoinid']
+		//vod_params['vjoinid'] = parsed.queryKey['vjoinid']
 
 		// replace embeds
 		var newSrc = parsed.path + '?';
@@ -89,8 +89,21 @@ function perform_video_voodoo(options) {
 
 	});
 
+	var vjoinids = new Array();
+	// collect sets vjoinids
+	$('[id^="setBtn"]').each(function () {
+		var code = $(this).attr('onclick').toString();
+		var vjoinid = code.match(/'vjoinid'\s*:\s*(\d+)/)[1];
+		var setnum = code.match(/mbSetSet\('(\d+)/)[1];
+		vjoinids[parseInt(setnum)] = vjoinid;
+	});
+
+	console.log('parsed set vjoinids',vjoinids);
 	console.log('final vod_params',vod_params);
-	get_video_url(vod_params);
+
+	params = $.extend({}, vod_params);
+	params['vjoinid'] = vjoinids[2];
+	get_video_url(params);
 }
 
 function get_video_url(params) {
