@@ -15,6 +15,12 @@ available_options = [
 	 desc: "Hide schedule entries.",
 	 opttype: "boolean",
 	 def: true},
+	{name: "vod-box",
+	 desc: "Remove VOD box (this has been tested for premium accounts only)",
+	 opttype: "choice",
+	 def: 'on',
+	 choices: ['on', 'Do nothing', 'remove', 'Remove VOD box', 'links', 'Replace with external media player links']
+	}
 ]//	"hide-flash-video-player": true,
 
 
@@ -49,6 +55,21 @@ _createOptionWidget = function(option, value, on_change) {
 				on_change(option.name, chkbox.attr('checked'));
 			});
 			return chkbox;
+		},
+
+		choice: function() {
+			var select = $('<select>');
+			for(var i = 0; i < option.choices.length; i += 2) {
+				var select_option = $('<option>');
+				select_option.attr('value', option.choices[i]);
+				select_option.text(option.choices[i+1]);
+				if (option.choices[i] == value) select_option.attr('selected', true);
+				select.append(select_option);
+			}
+			select.change(function() {
+				on_change(option.name, select.val());
+			});
+			return select;
 		}
 	};
 	if (! widgets.hasOwnProperty(option.opttype))

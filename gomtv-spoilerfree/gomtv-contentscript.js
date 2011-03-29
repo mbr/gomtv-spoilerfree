@@ -82,11 +82,6 @@ function perform_video_voodoo(options) {
 		// replace src - does not work, fix later (FIXME)
 		//$(this).attr('src', newSrc);
 
-		// remove player if desired
-		if (options['hide-flash-video-player']) {
-			$(this).remove();
-		}
-
 	});
 
 	var vjoinids = new Array();
@@ -101,12 +96,49 @@ function perform_video_voodoo(options) {
 	console.log('parsed set vjoinids',vjoinids);
 	console.log('final vod_params',vod_params);
 
-	params = $.extend({}, vod_params);
-	params['vjoinid'] = vjoinids[2];
-	get_video_url(params);
+	// remove player if desired
+	if ('remove' == options['vod-box']) {
+		$('#league_flvplayer_container').remove();
+	} else if ('links' == options['vod-box']) {
+		var loadingMsg = $('<div>Loading links...<br><br>Please wait.</div>');
+		var cont = $('#league_flvplayer_container');
+		cont.empty();
+		cont.append(loadingMsg);
+
+		var links_ul = $('<ul>');
+		var links = new Array();
+
+		// load stuff (sets start at 1)
+		for(var i = 1; i < vjoinids.length; ++i) {
+			var params = $.extend({}, vod_params);
+			params['vjoinid'] = vjoinids[i];
+			console.log('loading set',i,vjoinids[i]);
+
+			get_video_url(params, function(val) {
+				return function(url) {
+					links[val] = url;
+
+					links_ul.empty();
+					for(var i = 0; i < links.length; ++i) {
+						if (links[i]) {
+							var a = $('<a>');
+							a.attr('href', links[i]);
+							a.text('Set ' + i)
+							var li = $('<li>');
+							links_ul.append($('<li>').append(a));
+						}
+					}
+				}
+			}(i));
+
+		}
+
+		loadingMsg.replaceWith(links_ul);
+	}
+
 }
 
-function get_video_url(params) {
+function get_video_url(params, on_finish) {
 	var goxBase = 'http://www.gomtv.net/gox/gox.gom?';
 
 	var loginProxyBase = 'http://localhost:5000/gomlogin/';
@@ -141,6 +173,7 @@ function get_video_url(params) {
 
 			var finalURL = opts['ref'] + '&key=' + parts[5];
 			console.log('final URL',finalURL);
+			on_finish(finalURL);
 		});
 	});
 }
