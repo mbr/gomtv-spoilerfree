@@ -126,6 +126,11 @@ function perform_video_voodoo(options) {
 							a.text('Set ' + i)
 							var li = $('<li>');
 							links_ul.append($('<li>').append(a));
+							
+							// FIXME: regenerate links on click
+							a.click(function() {
+								$(this).replaceWith('link used up');
+							});
 						}
 					}
 				}
