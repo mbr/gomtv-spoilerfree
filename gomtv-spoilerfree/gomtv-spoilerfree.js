@@ -5,6 +5,7 @@ var options = {
 	"hide-social-networks": true,
 	"hide-comments": true,
 	"hide-schedule": true,
+	"hide-flash-video-player": true,
 }
 
 chrome.extension.onRequest.addListener(

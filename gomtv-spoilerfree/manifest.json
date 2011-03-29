@@ -5,6 +5,7 @@
 		{
 			"matches": ["*://*.gomtv.net/*"],
 			"js": ["jquery.min.js",
+			       "parseUri.js",
 			       "gomtv-contentscript.js"],
 			"css": ["gomtv-contentstyle.css"]
 		}
